@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Anniversary 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#ffe3ec;--bg2:#fff4e6;--card:#fff;--ink:#5a2a3c;--pink:#ff6b9d;--soft:#ffd1e0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2b1420;--bg2:#1f1018;--card:#3a1c2a;--ink:#ffe3ec;--pink:#ff7fab;--soft:#5a2a3c}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:'Quicksand',system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2));text-align:center;overflow-x:hidden}
+main{max-width:480px;margin:0 auto;padding:28px 18px 60px}
+h1{font-family:'Pacifico',cursive,serif;font-weight:400;color:var(--pink);font-size:2.3rem;margin:.2em 0}
+.card{background:var(--card);border-radius:24px;padding:20px;margin:22px 0;box-shadow:0 8px 24px rgba(255,107,157,.18)}
+.big{font-size:3rem;font-weight:700;color:var(--pink);line-height:1}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:12px 24px;background:var(--pink);color:#fff;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.12);transition:transform .1s}
+button:active{transform:translateY(3px)}
+#env{font-size:5rem;cursor:pointer;display:inline-block;transition:transform .3s}
+#env:hover{transform:scale(1.1) rotate(-4deg)}
+#letter{max-height:0;overflow:hidden;opacity:0;transition:all .6s;text-align:left;white-space:pre-line;line-height:1.6}
+#letter.open{max-height:600px;opacity:1;margin-top:14px}
+#reason{min-height:3.2em;margin:14px 0;font-size:1.1rem;display:flex;align-items:center;justify-content:center}
+.pop{animation:pop .4s}
+@keyframes pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
+#btns{position:relative;height:70px}
+#no{position:absolute;left:62%;top:8px;background:var(--soft);color:var(--ink)}
+#yes{position:absolute;left:12%;top:8px}
+.h{position:fixed;pointer-events:none;z-index:9;animation:up 2.2s ease-out forwards}
+@keyframes up{to{transform:translateY(-70vh) rotate(25deg);opacity:0}}
+.bg{position:fixed;bottom:-30px;pointer-events:none;opacity:.5;animation:float linear forwards;z-index:0}
+@keyframes float{to{transform:translateY(-115vh)}}
+main{position:relative;z-index:1}
+.tl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.mo{display:block;cursor:pointer;font-size:.85rem}
+.ph{aspect-ratio:1;border-radius:16px;background:var(--soft) center/cover;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:4px}
+.mo b{display:block;color:var(--pink)}
+</style>
+</head>
+<body>
+<main>
+  <div style="font-size:2.4rem">🎀</div>
+  <h1 id="title"></h1>
+  <p id="sub"></p>
+
+  <div class="card">
+    <div>we’ve been together for</div>
+    <div class="big" id="days">0</div>
+    <div>days (and counting) 💗</div>
+    <div id="detail" style="margin-top:8px;font-size:.9rem;opacity:.8"></div>
+  </div>
+
+  <div class="card">
+    <div id="env" title="Open me!">💌</div>
+    <div><small>tap the envelope</small></div>
+    <div id="letter"></div>
+  </div>
+
+  <div class="card">
+    <b>Reasons I love you</b>
+    <div id="reason">tap the button ↓</div>
+    <button id="rbtn">Show me one 💖</button>
+  </div>
+
+  <div class="card">
+    <b id="q"></b>
+    <div id="btns"><button id="yes">Yes 💕</button><button id="no">No</button></div>
+    <div id="ans" style="font-size:1.1rem;min-height:1.5em"></div>
+  </div>
+  <div class="card">
+    <b>Our 12 months 📸</b>
+    <div class="tl" id="tl"></div>
+  </div>
+  <p style="opacity:.6;font-size:.85rem">made with love by <span id="me"></span> ✨</p>
+</main>
+<script>
+// ✏️ EDIT THESE
+const C={
+  her:"Langgaa",
+  me:"Jayyyborg",
+  start:"2025-11-07", // the day you got together (YYYY-MM-DD)
+  letter:"Allloo babyy ko! Di pa rin ako makapaniwala na one year na tayo. I’m so happy na naging tayo for a year na pala with youuu.\n\nAlam ko baby na hindi naging madali ang mga pinagdaanan natin po, pero still, we always found a way para ayusin ang mga problema natin.\n\nI love youuu always babyy ko! Sana this is just a stepping stone sa relationship natin. I hope to have more memories with you babyy ko, and sana magkita na tayooo 💕\n\n- Jayyyborg",
+  reasons:["I love your eyesss 👀💖","I love your voice, every little sound you make hihi 🥰","I love the way na nagtatampo ka, ang cute mo hihi 🥺","I love you in every wayyy 💞","I love you, Langgaa 💕"],
+  question:"Will you keep being mine? 🥺",
+  yesMsg:"YAYYY! I love you so much! 🥰💞"
+};
+const $=id=>document.getElementById(id);
+$('title').textContent="Happy Anniversary, "+C.her+"!";
+$('sub').textContent="a tiny gift from me to you 🧸";
+$('letter').textContent=C.letter;$('q').textContent=C.question;$('me').textContent=C.me;
+// days counter
+const s=new Date(C.start+"T00:00:00"),now=new Date();
+const d=Math.max(0,Math.floor((now-s)/864e5));
+let n=0;const step=Math.max(1,Math.ceil(d/60));
+const t=setInterval(()=>{n=Math.min(d,n+step);$('days').textContent=n;if(n>=d)clearInterval(t)},25);
+$('detail').textContent="that’s about "+Math.floor(d/7)+" weeks of loving you";
+// hearts
+const E=["💖","💕","💗","✨","🌸","💞"];
+function burst(x,y,k=8){for(let i=0;i<k;i++){const e=document.createElement('div');e.className='h';e.textContent=E[Math.floor(Math.random()*E.length)];e.style.left=(x+Math.random()*60-30)+'px';e.style.top=(y+Math.random()*30-15)+'px';e.style.fontSize=(16+Math.random()*20)+'px';e.style.animationDelay=(Math.random()*.3)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),2800)}}
+document.addEventListener('click',e=>burst(e.clientX,e.clientY,4));
+setInterval(()=>{const e=document.createElement('div');e.className='bg';e.textContent=E[Math.floor(Math.random()*E.length)];e.style.left=Math.random()*100+'vw';e.style.fontSize=(14+Math.random()*18)+'px';e.style.animationDuration=(7+Math.random()*6)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),14000)},900);
+// 12 months timeline (img: put a photo link/data here later)
+const MONTHS=["Nov 2025","Dec 2025","Jan 2026","Feb 2026","Mar 2026","Apr 2026","May 2026","Jun 2026","Jul 2026","Aug 2026","Sep 2026","Oct 2026"].map((m,i)=>({m:m,cap:"Month "+(i+1),img:""}));
+MONTHS.forEach(o=>{
+ const el=document.createElement('label');el.className='mo';
+ const ph=document.createElement('div');ph.className='ph';
+ const b=document.createElement('b');b.textContent=o.m;
+ const sm=document.createElement('small');sm.textContent=o.cap;
+ const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.hidden=true;
+ const show=u=>{ph.style.backgroundImage='url('+u+')';ph.textContent=''};
+ if(o.img)show(o.img);else ph.textContent='📷';
+ inp.onchange=()=>{if(inp.files[0])show(URL.createObjectURL(inp.files[0]))};
+ el.append(ph,b,sm,inp);$('tl').appendChild(el)});
+// envelope
+$('env').onclick=()=>{const o=$('letter').classList.toggle('open');$('env').textContent=o?"💝":"💌"};
+// reasons
+let last=-1;
+$('rbtn').onclick=()=>{let i;do{i=Math.floor(Math.random()*C.reasons.length)}while(i===last&&C.reasons.length>1);last=i;const r=$('reason');r.textContent=C.reasons[i];r.classList.remove('pop');void r.offsetWidth;r.classList.add('pop')};
+// runaway no
+const no=$('no');
+function run(){no.style.left=(Math.random()*60+5)+'%';no.style.top=(Math.random()*30)+'px'}
+no.addEventListener('mouseenter',run);no.addEventListener('touchstart',e=>{e.preventDefault();run()},{passive:false});no.onclick=run;
+$('yes').onclick=e=>{$('ans').textContent=C.yesMsg;$('ans').className='pop';no.style.display='none';const r=e.target.getBoundingClientRect();burst(r.left+r.width/2,r.top,40)};
+</script>
+</body>
+</html>
